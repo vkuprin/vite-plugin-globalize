@@ -39,7 +39,7 @@ Once the plugin is configured, the extended prototypes can be used globally in y
 ```js
 // example.js
 const myArray = [1, 2, 3];
-myArray.customMethod(); // Use the custom method extended to Array's prototype
+myArray.reverseNumbers(); // Use the custom method extended to Array's prototype
 ```
 
 ## Support

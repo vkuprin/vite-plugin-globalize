@@ -6,46 +6,31 @@ interface PrototypeExtension {
 }
 
 export function protoGlobalPlugin(extensions: PrototypeExtension[]): VitePlugin {
+  const extensionScript = generateExtensionScript(extensions);
+
   return {
     name: "vite-plugin-proto-global",
-    enforce: "post",
-    apply: "build",
-    transformIndexHtml(html) {
-      const extensionScript = extensions.map((extension) => `
-        (function() {
-          const classPrototype = ${extension.className}.prototype;
-          ${Object.entries(extension.methods).map(([methodName, method]) => {
-        // Use function.toString() and handle the function name manually
-        const methodStr = method.toString().replace(/^function\s*/, 'function ');
-        return `classPrototype.${methodName} = ${methodStr};`;
-      }).join('')}
-        })();
-      `).join('');
-
-      console.log('Injected prototype extension script:', extensionScript); // For debugging
-
-      return html.replace(
-          '</body>',
-          `<script>${extensionScript}</script></body>`
-      );
+    enforce: "pre", // Changed to 'pre' to ensure early application
+    transform(code, id) {
+      if (id.endsWith('.js')) {
+        // Inject the extension script at the start of each JavaScript file
+        return {
+          code: `${extensionScript}\n${code}`,
+          map: null // ToDo: Check if source map is necessary
+        };
+      }
     }
   };
 }
 
-
-function extendPrototype(extension: PrototypeExtension) {
-  // @ts-ignore
-  const classPrototype = global[extension.className]?.prototype;
-  if (!classPrototype) {
-    console.warn(`Global class ${extension.className} not found`);
-    return;
-  }
-
-  for (const methodName in extension.methods) {
-    if (typeof extension.methods[methodName] === 'function') {
-      classPrototype[methodName] = extension.methods[methodName];
-    } else {
-      console.warn(`Method ${methodName} for class ${extension.className} is not a function`);
-    }
-  }
+function generateExtensionScript(extensions: PrototypeExtension[]): string {
+  return extensions.map((extension) => `
+    (function() {
+      const classPrototype = ${extension.className}.prototype;
+      ${Object.entries(extension.methods).map(([methodName, method]) => {
+    const methodStr = method.toString().replace(/^function\s*/, 'function ');
+    return `classPrototype.${methodName} = ${methodStr};`;
+  }).join('')}
+    })();
+  `).join('');
 }
