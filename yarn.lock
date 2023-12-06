@@ -2695,9 +2695,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-global-const@workspace:.":
+"vite-plugin-proto-global@workspace:.":
   version: 0.0.0-use.local
-  resolution: "vite-plugin-global-const@workspace:."
+  resolution: "vite-plugin-proto-global@workspace:."
   dependencies:
     "@types/node": "npm:^20.9.0"
     shelljs: "npm:^0.8.5"

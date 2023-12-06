@@ -1,16 +1,9 @@
 import { Plugin as VitePlugin } from 'vite';
-
-interface PrototypeMethods {
-    [methodName: string]: Function;
-}
-
 interface PrototypeExtension {
     className: string;
-    methods: PrototypeMethods;
+    methods: {
+        [methodName: string]: Function;
+    };
 }
-
-interface ProtoGlobalConfig {
-    extensions: PrototypeExtension[];
-}
-
-export declare function protoGlobalPlugin(config: ProtoGlobalConfig): VitePlugin;
+export declare function protoGlobalPlugin(extensions: PrototypeExtension[]): VitePlugin;
+export {};
