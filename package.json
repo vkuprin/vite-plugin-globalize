@@ -2,7 +2,7 @@
   "name": "vite-plugin-proto-global",
   "version": "0.0.1",
   "type": "module",
-  "description": "Define prototypes as global variables to entire project",
+  "description": "Define prototypes as global variables for entire project",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
