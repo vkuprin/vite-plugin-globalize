@@ -10,15 +10,15 @@ function protoGlobalPlugin(extensions: any[]) {
     name: "vite-plugin-proto-global",
     enforce: "post",
     apply: "build",
-    transformIndexHtml(html: string) {
-      const extensionScript = extensions.map(extension => `
+    transformIndexHtml(html) {
+      const extensionScript = extensions.map((extension) => `
         (function() {
           const classPrototype = ${extension.className}.prototype;
           ${Object.entries(extension.methods).map(([methodName, method]) => `
             classPrototype.${methodName} = ${method.toString()};
-          `).join('')}
+          `).join("")}
         })();
-      `).join('');
+      `).join("");
 
       console.log("Injected prototype extension script:", extensionScript); // For debugging
       return html.replace(
