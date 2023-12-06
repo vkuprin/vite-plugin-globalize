@@ -1,4 +1,4 @@
-# vite-plugin-proto-global
+# vite-plugin-proto-global (WORK IN PROGRESS)
 
 Extend JavaScript prototypes globally in your Vite project
 
