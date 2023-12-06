@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"paths": {
+			"vite": [
+				"node_modules/vite"
+			]
+		},
+		"baseUrl": "./",
+		"noImplicitAny": false,
+		"rootDir": "./src",
+		"outDir": "./esm",
+		"strict": false,
+		"noEmitOnError": false,
+		"declaration": true,
+		"declarationDir": "./types",
+		"types": [
+			"vite",
+		]
+	},
+	"include": [
+		"src//*.ts",
+		"node_modules/vite/**/*.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"/*.d.ts",
+		"/types/*.d.ts"
+	],
+}

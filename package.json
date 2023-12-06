@@ -1,0 +1,49 @@
+{
+  "name": "vite-plugin-proto-global",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Define prototypes as global variables to entire project",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "types",
+  "repository": "https://github.com/vkuprin/vite-plugin-global-const.git",
+  "homepage": "https://github.com/vkuprin/vite-plugin-global-const",
+  "bugs": {
+    "url": "https://github.com/vkuprin/vite-plugin-global-const/issues"
+  },
+  "author": "Vitaly Kuprin",
+  "license": "Apache License 2.0",
+  "keywords": [
+    "vite",
+    "global prototype",
+    "vite-plugin",
+    "const",
+    "global"
+  ],
+  "files": [
+    "/dist",
+    "/src",
+    "/esm",
+    "/types"
+  ],
+  "scripts": {
+    "build": "tsc && unbuild",
+    "demo:reload": "node ./scripts/demo-reload.js",
+    "release": "node ./scripts/release.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "shelljs": "^0.8.5",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vite": "^4.5.0"
+  },
+  "packageManager": "yarn@4.0.2"
+}
