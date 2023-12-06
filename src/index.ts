@@ -15,14 +15,16 @@ export function protoGlobalPlugin(extensions: PrototypeExtension[]): VitePlugin 
         (function() {
           const classPrototype = ${extension.className}.prototype;
           ${Object.entries(extension.methods).map(([methodName, method]) => `
-            classPrototype.${methodName} = ${method.toString()};
+            classPrototype.${methodName} = ${method};
           `).join('')}
         })();
       `).join('');
 
+      console.log('Injected prototype extension script:', extensionScript); // For debugging
+
       return html.replace(
-          '</head>',
-          `<script>${extensionScript}</script></head>`
+          '</body>',
+          `<script>${extensionScript}</script></body>`
       );
     }
   };
