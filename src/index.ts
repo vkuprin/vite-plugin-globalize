@@ -5,7 +5,7 @@ interface PrototypeExtension {
   methods: { [methodName: string]: Function };
 }
 
-function protoGlobalPlugin(extensions: any[]) {
+export function protoGlobalPlugin(extensions: PrototypeExtension[]): VitePlugin {
   return {
     name: "vite-plugin-proto-global",
     enforce: "post",
@@ -14,20 +14,24 @@ function protoGlobalPlugin(extensions: any[]) {
       const extensionScript = extensions.map((extension) => `
         (function() {
           const classPrototype = ${extension.className}.prototype;
-          ${Object.entries(extension.methods).map(([methodName, method]) => `
-            classPrototype.${methodName} = ${method.toString()};
-          `).join("")}
+          ${Object.entries(extension.methods).map(([methodName, method]) => {
+        // Use function.toString() and handle the function name manually
+        const methodStr = method.toString().replace(/^function\s*/, 'function ');
+        return `classPrototype.${methodName} = ${methodStr};`;
+      }).join('')}
         })();
-      `).join("");
+      `).join('');
 
-      console.log("Injected prototype extension script:", extensionScript); // For debugging
+      console.log('Injected prototype extension script:', extensionScript); // For debugging
+
       return html.replace(
-          "</body>",
-          `<script>${extensionScript}<\/script></body>`
+          '</body>',
+          `<script>${extensionScript}</script></body>`
       );
     }
   };
 }
+
 
 function extendPrototype(extension: PrototypeExtension) {
   // @ts-ignore

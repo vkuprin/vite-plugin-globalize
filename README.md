@@ -19,17 +19,17 @@ import { protoGlobalPlugin } from 'vite-plugin-proto-global'
 
 export default defineConfig({
   plugins: [
-    protoGlobalPlugin([
-      {
-        className: 'Array',
-        methods: {
-          customMethod() {
-            // Custom method logic
-          }
-        }
-      },
-      // Add more prototype extensions as needed
-    ]),
+      protoGlobalPlugin([
+          {
+              className: 'Array',
+              methods: {
+                  reverseNumbers: `function() {
+                    return this.sort((a, b) => b - a);
+                }`
+              },
+          },
+          // ... other extensions
+      ])
   ],
 })
 ```
@@ -40,28 +40,6 @@ Once the plugin is configured, the extended prototypes can be used globally in y
 // example.js
 const myArray = [1, 2, 3];
 myArray.customMethod(); // Use the custom method extended to Array's prototype
-```
-## FAQ
-If you are developing another Vite plugin and want to include prototype extensions, you can use protoGlobalPlugin in your plugin's configuration:
-
-```js
-// custom-plugin.js
-import { protoGlobalPlugin } from 'vite-plugin-proto-global'
-
-export function customPlugin() {
-  return {
-    name: 'vite-plugin-custom',
-    config: () => {
-      return {
-        plugins: [
-          protoGlobalPlugin([
-            // Your prototype extensions here
-          ])
-        ]
-      }
-    }
-  }
-}
 ```
 
 ## Support
