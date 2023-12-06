@@ -5,26 +5,25 @@ interface PrototypeExtension {
   methods: { [methodName: string]: Function };
 }
 
-export function protoGlobalPlugin(extensions: PrototypeExtension[]): VitePlugin {
+function protoGlobalPlugin(extensions: any[]) {
   return {
-    name: 'vite-plugin-proto-global',
-    enforce: 'post',
-    apply: 'build',
-    transformIndexHtml(html) {
+    name: "vite-plugin-proto-global",
+    enforce: "post",
+    apply: "build",
+    transformIndexHtml(html: string) {
       const extensionScript = extensions.map(extension => `
         (function() {
           const classPrototype = ${extension.className}.prototype;
           ${Object.entries(extension.methods).map(([methodName, method]) => `
-            classPrototype.${methodName} = ${method};
+            classPrototype.${methodName} = ${method.toString()};
           `).join('')}
         })();
       `).join('');
 
-      console.log('Injected prototype extension script:', extensionScript); // For debugging
-
+      console.log("Injected prototype extension script:", extensionScript); // For debugging
       return html.replace(
-          '</body>',
-          `<script>${extensionScript}</script></body>`
+          "</body>",
+          `<script>${extensionScript}<\/script></body>`
       );
     }
   };
