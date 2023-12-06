@@ -10,8 +10,20 @@ export function protoGlobalPlugin(extensions: PrototypeExtension[]): VitePlugin 
     name: 'vite-plugin-proto-global',
     enforce: 'post',
     apply: 'build',
-    transformIndexHtml() {
-      extensions.forEach(extendPrototype);
+    transformIndexHtml(html) {
+      const extensionScript = extensions.map(extension => `
+        (function() {
+          const classPrototype = ${extension.className}.prototype;
+          ${Object.entries(extension.methods).map(([methodName, method]) => `
+            classPrototype.${methodName} = ${method.toString()};
+          `).join('')}
+        })();
+      `).join('');
+
+      return html.replace(
+          '</head>',
+          `<script>${extensionScript}</script></head>`
+      );
     }
   };
 }

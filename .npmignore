@@ -1,0 +1,19 @@
+# Source code
+src/
+
+# TypeScript files
+types/
+tsconfig.json
+build.config.ts
+
+# Demo files
+demo/
+
+# Scripts
+scripts/
+
+# Node modules
+node_modules/
+
+# Configuration files
+yarn.lock
