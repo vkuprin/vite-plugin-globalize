@@ -4,12 +4,16 @@ export default defineBuildConfig({
   entries: [
     'src/index',
   ],
+  clean: false,
   declaration: true,
-  clean: true,
+  externals: [
+    'vite',
+  ],
   rollup: {
     emitCJS: true,
-    // dts: {
-    //   compilerOptions:{}
-    // }
+    inlineDependencies: true,
+    dts: {
+      respectExternal: true,
+    },
   },
 })

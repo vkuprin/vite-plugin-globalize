@@ -17,6 +17,7 @@ export function protoGlobalPlugin(extensions: PrototypeExtension[]): VitePlugin 
 }
 
 function extendPrototype(extension: PrototypeExtension) {
+  // @ts-ignore
   const classPrototype = global[extension.className]?.prototype;
   if (!classPrototype) {
     console.warn(`Global class ${extension.className} not found`);

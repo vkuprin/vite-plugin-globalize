@@ -3,11 +3,6 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "node",
-		"paths": {
-			"vite": [
-				"node_modules/vite"
-			]
-		},
 		"baseUrl": "./",
 		"noImplicitAny": false,
 		"rootDir": "./src",
@@ -17,16 +12,15 @@
 		"declaration": true,
 		"declarationDir": "./types",
 		"types": [
-			"vite",
+			"vite"
 		]
 	},
 	"include": [
-		"src//*.ts",
-		"node_modules/vite/**/*.d.ts"
+		"src/**/*.ts"
 	],
 	"exclude": [
 		"node_modules",
-		"/*.d.ts",
-		"/types/*.d.ts"
-	],
+		"*.d.ts",
+		"types/*.d.ts"
+	]
 }
