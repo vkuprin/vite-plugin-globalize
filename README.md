@@ -23,9 +23,9 @@ export default defineConfig({
           {
               className: 'Array',
               methods: {
-                  reverseNumbers: `function() {
+                  reverseNumbers: function() {
                     return this.sort((a, b) => b - a);
-                }`
+                },
               },
           },
           // ... other extensions
