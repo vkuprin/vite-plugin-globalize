@@ -1,5 +1,5 @@
 # Source code
-src/
+src/index.ts
 
 # TypeScript files
 types/

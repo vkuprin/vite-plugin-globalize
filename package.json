@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-proto-global",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "description": "Define JS prototypes as globals for entire project",
   "exports": {
@@ -13,10 +13,10 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "types",
-  "repository": "https://github.com/vkuprin/vite-plugin-global-const.git",
-  "homepage": "https://github.com/vkuprin/vite-plugin-global-const",
+  "repository": "https://github.com/vkuprin/vite-plugin-proto-global.git",
+  "homepage": "https://github.com/vkuprin/vite-plugin-proto-global",
   "bugs": {
-    "url": "https://github.com/vkuprin/vite-plugin-global-const/issues"
+    "url": "https://github.com/vkuprin/vite-plugin-proto-global/issues"
   },
   "author": "Vitaly Kuprin",
   "license": "Apache License 2.0",
